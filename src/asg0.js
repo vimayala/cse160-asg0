@@ -107,10 +107,12 @@ function handleDrawOperationEvent(){
     angleBetween(v1, v2);
   }
   else if(op == "mag"){
-    console.log("Magnitude v1: " + v3.magnitude())
-    console.log("Magnitude v2: " + v4.magnitude())
+    // Method used for rounding: https://stackoverflow.com/questions/11832914/how-to-round-to-at-most-2-decimal-places-if-necessary
 
+    console.log("Magnitude v1: " + Math.round(v3.magnitude() * 100) / 100)
+    console.log("Magnitude v2: " + Math.round(v4.magnitude() * 100) / 100)
   }
+
   else if(op == "norm"){
     v3.normalize()
     v4.normalize()
