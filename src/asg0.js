@@ -12,12 +12,6 @@ function main() {
 
   // Call for a blank canvas
   clearCanvas();
-
-  // let vector1 = new Vector3({0: 2, 1: 6.8, 2: -23});
-  // let vector2 = new Vector3({0: 8, 1: -2, 2: -9});
-
-  // console.log("Dot of vectors: " + Vector3.dot(vector1, vector2));
-
 }
 
 
@@ -31,11 +25,13 @@ function clearCanvas() {
 }
 
 function drawVector(v, color){
+  // Set color to inputted color
   ctx.strokeStyle = color;
 
   let cx = canvas.width/2;
   let cy = canvas.height/2;
   
+  // Set the scale and vector values 
   const scale = 20;
   const vx = v.elements[0] * scale;
   const vy = v.elements[1] * scale;
@@ -49,6 +45,7 @@ function drawVector(v, color){
 
 
 function handleDrawEvent(){
+  // Call clearCanvas to set up new canvas
   clearCanvas();
   
   // Get the input values from x and y for v1
@@ -64,12 +61,16 @@ function handleDrawEvent(){
   v1 = new Vector3({ 0: v1XVal, 1: v1YVal, 2: 0});
   v2 = new Vector3({ 0: v2XVal, 1: v2YVal, 2: 0});
 
+  // Draw both vectors
   drawVector(v1, "red")
   drawVector(v2, "blue")
 }
 
 function handleDrawOperationEvent(){
+  // Redraw the v1 and v2 vectors
   handleDrawEvent();
+
+  // Get the operation selection and scalar input
   op = document.getElementById('operations').value;
   scalar = document.getElementById('scalar').value;
 
@@ -78,8 +79,7 @@ function handleDrawOperationEvent(){
 
 
   // Check operation
-  //    Perform operation
-  //    Draw new vectors
+  // Then, perform operation and draw/output
   if(op == "add"){
     v3.add(v2)
     drawVector(v3, "green");
@@ -120,13 +120,17 @@ function handleDrawOperationEvent(){
 }
 
 function angleBetween(vec1, vec2){
+  // Find dot product
   let dot = Vector3.dot(vec1, vec2)
+  // Get magnitude
   let m = vec1.magnitude() * vec2.magnitude();
+  // Get angle in degrees
   // Method used for rounding: https://stackoverflow.com/questions/11832914/how-to-round-to-at-most-2-decimal-places-if-necessary
   console.log("Angle: " + Math.round((Math.acos(dot / m) * 180)/Math.PI * 100) / 100);
 }
 
 function findArea(vec1, vec2){
+  // Get cross product, find new vector's magnitude, use to get area
   let cross = Vector3.cross(vec1, vec2)
   let mgntd = cross.magnitude()
   console.log("Area of the triangle: " + mgntd /  2);
